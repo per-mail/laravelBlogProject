@@ -20,9 +20,10 @@ return new class extends Migration
 //у одной категории может быть несколько постов, у одного поста может быт одна категория, поэтому foreign key пишем в таблице posts
             $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 //привязываем категории к постам
             $table->index('category_id', 'post_category_idx');
-            $table->foreign('category_id', 'post_category_fk')->on('categories')->references('category_id');
+            $table->foreign('category_id', 'post_category_fk')->on('category')->references('category_id');
         });
     }
 

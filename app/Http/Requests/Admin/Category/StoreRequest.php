@@ -16,17 +16,12 @@ class StoreRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-           'title' => 'required|string'
+            'title' => 'required|string',
 //   вариант с проверкой на уникальность
-//            'title' => 'required|string|unique:categories,title'
+//            'title' => 'required|string|unique:category,title'
         ];
     }
 }

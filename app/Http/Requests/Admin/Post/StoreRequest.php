@@ -21,6 +21,12 @@ class StoreRequest extends FormRequest
         return [
             'title' => 'required|string',
             'content' => 'required|string',
+            'preview_image' => 'required|file',
+            'main_image' => 'required|file',
+//   'required|integer|exists: categories,id' проверка, что в базе данных в таблице categories есть id которому равен category_id
+            'category_id' => '',
+            'tag_id' => 'nullable|array',
+            'tag_ids.*' => 'nullable|integer|exists:tags,id',
         ];
     }
 }

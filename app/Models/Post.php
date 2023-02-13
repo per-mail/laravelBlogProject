@@ -12,4 +12,10 @@ class Post extends Model
     use SoftDeletes;
     protected $table = 'posts';
     protected $guarded = [];
+
+//  отношение многгие ко многим
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id',);
+    }
 }

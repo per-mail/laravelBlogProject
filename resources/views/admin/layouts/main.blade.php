@@ -33,13 +33,23 @@
         <img class="animation__shake" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60"
              width="60">
     </div>
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <!-- Left navbar links -->
+<!-- d-flex justify-content-between - перемещает кнопку Выйти в правую сторону -->
+        <div class="col-12 d-flex justify-content-between">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <input class="btn btn-outline-primary" type="submit" value="Выйти">
+                </form>
+            </li>
+        </ul>
+    </nav>
 
             @include('admin.includes.sidebar')
             @yield('content')

@@ -11,8 +11,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.main.index') }}">Главная</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('admin.post.index') }}">Посты</a></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -26,13 +26,13 @@
                         <form action="{{ route('admin.post.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group  w-25">
-{{--                                name='title': name-берём из базы --}}
+                                {{--                                name='title': name-берём из базы --}}
                                 <input type="text" class="form-control" name="title" placeholder="Название поста"
-{{--                                       сохраняем текст в заголовке если пост не отправился --}}
-                                value="{{ old('title') }}">
-                            @error('title')
-                            <div class="text-danger">{{ $message }} </div>
-                            @enderror
+                                       {{--                                       сохраняем текст в заголовке если пост не отправился --}}
+                                       value="{{ old('title') }}">
+                                @error('title')
+                                <div class="text-danger">{{ $message }} </div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 {{--                                       сохраняем текст в контенте если пост не отправился --}}
@@ -47,7 +47,7 @@
                                 <label for="exampleInputFile">Добавить превью</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="preview_image" >
+                                        <input type="file" class="custom-file-input" name="preview_image">
                                         <label class="custom-file-label">Выберите изображение</label>
                                     </div>
                                     <div class="input-group-append">
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                                 @error('preview_image')
-                                     <div class="text-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group w-50">
@@ -72,35 +72,37 @@
                             </div>
                             @error('main_image')
                             <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                        @enderror
                     </div>
-                            <div class="form-group w-50">
-                                <label>Выберите категорию</label>
-                                <select name="category_id" class="form-control">
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                        {{ $category->id == old('category_id') ? ' selected': '' }}>{{ $category->title }}</option>
-                                    @endforeach
-                                </select>
-                                @error('category_id')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Тэги</label>
-                                    <select class="select2" name="tag_ids[]" multiple="multiple" data-placeholder="Выберите тэги" style="width: 100%;">
-                                        @foreach($tags as $tag)
-                                            <option {{ is_array( old('tag_ids')) && in_array($tag->id, old('tag_ids')) ? ' selected' : '' }} value="{{ $tag->id}}">{{ $tag->title }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('tag_ids')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="Добавить">
-                            </div>
+                    <div class="form-group w-50">
+                        <label>Выберите категорию</label>
+                        <select name="category_id" class="form-control">
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ $category->id == old('category_id') ? ' selected': '' }}>{{ $category->title }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" w-50>
+                            <label>Тэги</label>
+                            <select class="select2" name="tag_ids[]" multiple="multiple"
+                                    data-placeholder="Выберите тэги" style="width: 100%;">
+                                @foreach($tags as $tag)
+                                    <option
+                                        {{ is_array( old('tag_ids')) && in_array($tag->id, old('tag_ids')) ? ' selected' : '' }} value="{{ $tag->id}}">{{ $tag->title }}</option>
+                                @endforeach
+                            </select>
+                            @error('tag_ids')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Добавить">
+                        </div>
                         </form>
                     </div>
                 </div>

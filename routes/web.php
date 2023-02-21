@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,15 +15,42 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace'=> 'App\Http\Controllers\Main'], function () {
-    Route::get('/', 'IndexController');
+    Route::get('/', 'IndexController')->name('main.index');
 });
+
+// вывод постов на сайте
+Route::group(['namespace'=> 'App\Http\Controllers\Post', 'prefix' => 'posts'], function () {
+    Route::get('/', 'IndexController')->name('post.index');
+    Route::get('/{post}', 'ShowController')->name('post.show');
+});
+
 //'middleware' => ['auth', 'admin'] - сначала проверяем пользователей зашедших на сайт авторизованы ли они при помощи 'auth', далее 'admin' проверяет наличие прав админа у пользователя
-Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+Route::group(['namespace'=> 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth', 'admin']], function () {
 // отправка письма пользователю при регистрации
 //Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
-    Route::group(['namespace'=> 'Main'], function () {
-        Route::get('/', 'IndexController')->name('admin.main.index');
+    Route::group(['namespace'=> 'Main', 'prefix' => 'main'], function () {
+        Route::get('/', 'IndexController')->name('personal.main.index');
     });
+    Route::group(['namespace'=> 'Liked', 'prefix' => 'likeds'], function () {
+        Route::get('/', 'IndexController')->name('personal.liked.index');
+        Route::delete('/{post}', 'DeleteController')->name('personal.liked.delete');
+    });
+    Route::group(['namespace'=> 'Comment', 'prefix' => 'comments'], function () {
+        Route::get('/', 'IndexController')->name('personal.comment.index');
+        Route::get('/{comment}/edit', 'EditController')->name('personal.comment.edit');
+        Route::patch('/{comment}', 'UpdateController')->name('personal.comment.update');
+        Route::delete('/{comment}', 'DeleteController')->name('personal.comment.delete');
+    });
+});
+
+// 'middleware' => ['auth', 'admin'] - сначала проверяем пользователей зашедших на сайт авторизованы ли они при помощи 'auth', далее 'admin' проверяет наличие прав админа у пользователя
+Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+// отправка письма пользователю при регистрации
+//    Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
+    Route::group(['namespace'=> 'Main'], function () {
+            Route::get('/', 'IndexController')->name('admin.main.index');
+        });
+
     Route::group(['namespace'=> 'Post', 'prefix' => 'posts'], function () {
         Route::get('/', 'IndexController')->name('admin.post.index');
         Route::get('/create', 'CreateController')->name('admin.post.create');
@@ -66,6 +94,6 @@ Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
 });
 
 Auth::routes();
-//отправка письма пользователю при регистрации
+//  отправка письма пользователю при регистрации
 //Auth::routes(['verify' => true]);
 

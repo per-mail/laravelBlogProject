@@ -56,4 +56,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+//  отправка письма пользователю при регистрации
+//    public function sendEmailVerificationNotification()
+//    {
+//        $this->notify(new SendVerifyWithQueueNotification());
+//    }
+
+// создаём отношение многие ко многим лайки и пользователи
+    public function likedPosts()
+    {
+       return $this->belongsToMany(Post::class, 'post_user_likes', 'user_id', 'post_id');
+    }
+
+// создаём отношение один ко многим комменттарий и посты
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id', 'id');
+    }
 }

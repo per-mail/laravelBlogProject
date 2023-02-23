@@ -18,7 +18,8 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="index.html"><img src="{{ 'assets/images/logo.svg' }}" alt="Edica"></a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#edicaMainNav" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#edicaMainNav"
+                    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="edicaMainNav">
@@ -26,6 +27,16 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('main.index') }}">Блог</a>
+                    </li>
+                    <li class="nav-item">
+{{--                        режим работы в личном кабинете--}}
+                        @auth()
+                            <a class="nav-link" href="{{ route('personal.main.index') }}">Личный кабинет</a>
+                        @endauth()
+{{--                        вход в Личный кабинет<--}}
+                        @guest()
+                            <a class="nav-link" href="{{ route('personal.main.index') }}">Войти</a>
+                        @endguest()
                     </li>
                 </ul>
             </div>

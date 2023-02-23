@@ -19,7 +19,7 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id',);
     }
 
-    public function category ()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
@@ -36,5 +36,4 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class, 'post_id', 'id');
     }
-
 }

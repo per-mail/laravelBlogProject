@@ -13,6 +13,12 @@ class Post extends Model
     protected $table = 'posts';
     protected $guarded = [];
 
+//  считаем количесство лайков у поста
+//   protected $withCount = ['likedUsers'];
+
+//  оптимизируем код уменьшаем количество запросов к бд, посты будут приходть из базы вместе м категориями, не нужно делать отдельные запросы по постам и категориям
+    protected $with = ['category'];
+
 //  отношение многие ко многим
     public function tags()
     {

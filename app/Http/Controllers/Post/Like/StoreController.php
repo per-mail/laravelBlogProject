@@ -9,23 +9,14 @@ use App\Models\Post;
 
 class StoreController extends Controller
 {
-    public function __invoke(Post $post, StoreRequest $request)
+    public function __invoke(Post $post)
     {
-//  получаем оставленный комментарий и помещаем его в $data
-        $data = $request->validated();
+//  при помощи auth() получаем авторизованных пользователей
+//  метод toggle() проверяет при нажатии если этот пользователь уже поставил лайк то он его убирает, если лайка от этого пользователя не было добавляет
+        auth()->user()->likedPosts()->toggle($post->id);
 
-
-//  получаем id пользователя, который отправил комментарий и добавляем его в $data
-        $data['user_id'] = auth()->user()->id;
-
-//  получаем id поста, которому отправлен комментарий и добавляем его в $data
-        $data['post_id'] = $post->id;
-
-//  добавляем данные комментария в таблицу
-        Comment::create($data);
-
-//  $post->id - нужен чтобы найти нужный пост
-        return redirect()->route('post.show', $post->id);
+//  redirect()->back() - возвращает обратно к посту котоорый пролайкали
+        return redirect()->back();
     }
 }
 

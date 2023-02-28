@@ -42,6 +42,7 @@
             </li>
         </ul>
         <ul class="navbar-nav">
+            <a class="btn btn-outline-primary" href="{{ route('main.index') }}">Сайт</a>
             <li class="nav-item">
                 <form action="{{ route('logout') }}" method="post">
                     @csrf

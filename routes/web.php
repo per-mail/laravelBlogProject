@@ -32,6 +32,15 @@ Route::group(['namespace'=> 'App\Http\Controllers\Post', 'prefix' => 'posts'], f
     });
 });
 
+// вывод меню категорий на сайте
+Route::group(['namespace'=> 'App\Http\Controllers\Category', 'prefix' => 'categories'], function () {
+    Route::get('/', 'IndexController')->name('category.index');
+    //  вложенный маршрут (nested rout) для категорий
+    Route::group(['namespace'=> 'Post', 'prefix' => '{category}/posts'], function () {
+        Route::get('/', 'IndexController')->name('category.post.index');
+    });
+});
+
 //'middleware' => ['auth', 'admin'] - сначала проверяем пользователей зашедших на сайт авторизованы ли они при помощи 'auth', далее 'admin' проверяет наличие прав админа у пользователя
 Route::group(['namespace'=> 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth', 'admin']], function () {
 // отправка письма пользователю при регистрации

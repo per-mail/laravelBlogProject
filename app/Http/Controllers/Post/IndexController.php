@@ -10,6 +10,9 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
+//  пример оптимизируем код в отдельном запрос уменьшаем количество запросов к бд
+//        $posts = Post::with('category')->paginate(6);
+
         $posts = Post::paginate(6);
 
 //  делаем sql-запрос, выводим 4 случайных поста внизу страницы

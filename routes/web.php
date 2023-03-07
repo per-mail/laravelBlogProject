@@ -18,6 +18,8 @@ Route::group(['namespace'=> 'App\Http\Controllers\Main'], function () {
     Route::get('/', 'IndexController')->name('main.index');
 });
 
+Route::get('/test', 'App\Http\Controllers\Test\UserController@index')->name('test.index');
+
 // вывод постов на сайте
 Route::group(['namespace'=> 'App\Http\Controllers\Post', 'prefix' => 'posts'], function () {
     Route::get('/', 'IndexController')->name('post.index');

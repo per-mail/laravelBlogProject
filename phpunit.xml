@@ -27,5 +27,10 @@
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
+<!--        Для тестов мы должны иметь возможность брать точные данные, которые необходимы для работы конкретного теста.-->
+<!--        Значение :memory: переменной DB_DATABASE говорит sqlite, что мы используем не реальные файлы, а работаем в памяти.-->
+        <env name="APP_ENV" value="testing"/>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
     </php>
 </phpunit>

@@ -10,6 +10,10 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
+//// меняем функцию для изучения тестирования, метод будет получать сообщения и передавать их в шаблон index.blade.php в папке posts
+//        $posts = Post::latest()->get();
+//        return view('posts.index',compact('posts'));
+
 //  пример оптимизируем код в отдельном запрос уменьшаем количество запросов к бд
 //        $posts = Post::with('category')->paginate(6);
 

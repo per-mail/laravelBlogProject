@@ -23,7 +23,7 @@ return new class extends Migration
 
             //            IDX
             $table->index('post_id', 'post_tag_post_idx');
-            $table->index('category_id', 'post_tag_tag_idx');
+            $table->index('tag_id', 'post_tag_tag_idx');
 
             //            FK
             $table->foreign('post_id', 'post_tag_post_fk')->on('posts')->references('id');

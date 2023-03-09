@@ -45,7 +45,7 @@ class RegistrationTest extends TestCase
 // утверждение,что в таблице users есть запись с почтой test@example.com'
         $this->assertDatabaseHas('users', [
         'email' => 'test@example.com',
-]);
+     ]);
     }
 }
 // assertions (утверждения)

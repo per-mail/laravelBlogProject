@@ -31,12 +31,19 @@ class ApiPostTest extends TestCase
     {
 //  обращаемся к фабрике постов и создаём один пост
 //  Метод create инициализирует экземпляры модели и сохраняет их в базе данных 
-       $post = Post::factory()->create();
+    //    $post = Post::factory()->create();
+
+    $post = Post::factory()->make([
+        'titel' => 'Test Post',
+        'content' => 'Some content',  
+        'category_id' => 1,
+    ]);
 
 
-//  assertDatabaseCount('users', 1); - утверждение,что в таблице posts есть одна запись
-        $this->assertDatabaseCount('posts', 100);
-
+// утверждение,что в таблице posts есть запись с 'titel' = 'Test Post',
+    $this->assertDatabaseHas('posts', [
+         'titel' => 'Test Post',
+        ]);
     }
 }
 

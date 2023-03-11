@@ -30,7 +30,7 @@ class PostFactory extends Factory
             'preview_image' => $this->faker->imageUrl(),
             'main_image' => $this->faker->imageUrl(),            
 // выбираем случайную категорию
-            'category_id' => Category::get()->random()->id,
+            'category_id' => Category::get()->random()->id,                 
         ];
     }
 }

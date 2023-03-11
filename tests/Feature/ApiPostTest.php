@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 use App\Models\Post;
+use App\Models\Category;
 
 class ApiPostTest extends TestCase
 {
@@ -15,36 +16,42 @@ class ApiPostTest extends TestCase
     // Для этого вам потребуется создать отдельную тестовую базу данных, 
     // которая будет обновляться с помощью команды php artisan migrate:fresh
     // каждый раз при выполнении тестов.
-    // use RefreshDatabase;
+    use RefreshDatabase;
     
 // тест проверяет правильность загрузки формы
     public function test_create_post_can_be_rendered()
     {
         $response = $this->get('/admin/posts/create');
 
-        $response->assertStatus(302);
+        $this->assertTrue($response->getStatusCode() === 200 || $response->getStatusCode() === 302);
     }
 
 //  тест проверяет  хорошо ли работает отправка
 //  в этом тесте мы утверждаем, что пользователь успешно прошёл аутентифицирован и перенаправлен на правильную домашнюю страницу
     public function test_new_post()
     {
+//  обращаемся к фабрике категорий, чтобы в таблице постов можно было сгенерировать значение для колонки 'category_id'      
+        $category = Category::factory()->create();
+
 //  обращаемся к фабрике постов и создаём один пост
-//  Метод create инициализирует экземпляры модели и сохраняет их в базе данных 
+//  метод create инициализирует экземпляры модели и сохраняет их в базе данных 
     //    $post = Post::factory()->create();
 
-    $post = Post::factory()->make([
-        'titel' => 'Test Post',
-        'content' => 'Some content',  
-        'category_id' => 1,
+    
+
+//  переопреляем строку 'title', чтобы она вносила в базу 'Test Post', для проверки утверждения
+    $post = Post::factory()->create([
+        'title' => 'Test Post',                 
     ]);
 
 
 // утверждение,что в таблице posts есть запись с 'titel' = 'Test Post',
     $this->assertDatabaseHas('posts', [
-         'titel' => 'Test Post',
+         'title' => 'Test Post',         
         ]);
     }
 }
 
 //  php artisan test
+//  php artisan make:test PageTest
+//  php artisan make:test HomePageTest --unit

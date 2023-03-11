@@ -30,7 +30,7 @@ class AuthenticationTest extends TestCase
             'email' => $user->email,
             'password' => 'password',
         ]);
-
+//  утверждение, что пользователь аутентифицирован:
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
@@ -43,7 +43,7 @@ class AuthenticationTest extends TestCase
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);
-
+//  утверждение, что пользователь не аутентифицирован:
         $this->assertGuest();
     }
 }

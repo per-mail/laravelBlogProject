@@ -55,9 +55,11 @@
             @include('admin.includes.sidebar')
             @yield('content')
 
-            <footer class="main-footer">
-                <strong>Blog</strong>
-            </footer>
+ 
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2014-{{ now()->year }} <a href="{{ route('main.index') }}">Блог</a>.</strong>
+        Все права защищены.
+    </footer>
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
                 <!-- Control sidebar content goes here -->

@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Редактирование тэга</h1>
+                        <h1 class="m-0">Редактирование поста</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -82,6 +82,7 @@
                                 @error('main_image')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
+                                </div>
                                 <div class="form-group w-50">
                                     <label>Выберите категорию</label>
                                     <select name="category_id" class="form-control">

@@ -77,7 +77,7 @@ Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
         Route::get('/{post}', 'ShowController')->name('admin.post.show');
         Route::get('/{post}/edit', 'EditController')->name('admin.post.edit');
         Route::patch('/{post}', 'UpdateController')->name('admin.post.update');
-        Route::delete('/{post}', 'StoreController')->name('admin.post.delete');
+        Route::delete('/{post}', 'DeleteController')->name('admin.post.delete');
     });
 
     Route::group(['namespace'=> 'Category', 'prefix' => 'categories'], function () {
@@ -87,7 +87,7 @@ Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
         Route::get('/{category}', 'ShowController')->name('admin.category.show');
         Route::get('/{category}/edit', 'EditController')->name('admin.category.edit');
         Route::patch('/{category}', 'UpdateController')->name('admin.category.update');
-        Route::delete('/{category}', 'StoreController')->name('admin.category.delete');
+        Route::delete('/{category}', 'DeleteController')->name('admin.category.delete');
     });
 
     Route::group(['namespace'=> 'Tag', 'prefix' => 'tags'], function () {
@@ -97,7 +97,7 @@ Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
         Route::get('/{tag}', 'ShowController')->name('admin.tag.show');
         Route::get('/{tag}/edit', 'EditController')->name('admin.tag.edit');
         Route::patch('/{tag}', 'UpdateController')->name('admin.tag.update');
-        Route::delete('/{tag}', 'StoreController')->name('admin.tag.delete');
+        Route::delete('/{tag}', 'DeleteController')->name('admin.tag.delete');
     });
 
     Route::group(['namespace'=> 'User', 'prefix' => 'users'], function () {
@@ -107,7 +107,7 @@ Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
         Route::get('/{user}', 'ShowController')->name('admin.user.show');
         Route::get('/{user}/edit', 'EditController')->name('admin.user.edit');
         Route::patch('/{user}', 'UpdateController')->name('admin.user.update');
-        Route::delete('/{user}', 'StoreController')->name('admin.user.delete');
+        Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
     });
 
 });

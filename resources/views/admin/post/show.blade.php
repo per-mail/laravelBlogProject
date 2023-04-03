@@ -44,7 +44,29 @@
                                     <tr>
                                         <td>Название</td>
                                         <td>{{ $post->title }}</td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td>Категория</td>
+                                        <td>{{ $post->category->title }}</td>
+                                    </tr>                                                                   
+                                    <tr>
+                                        <td>Дата добавления продукта</td>
+                                        <td>{{ $post->created_at }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Дата обновления продукта</td>
+                                        <td>{{ $post->updated_at }}</td>
+                                    </tr>                         
+                                    <tr>
+                                        <td>Главная картинка</td>
+                                        <td><section class="blog-post-featured-img" data-aos="fade-up">
+                                        <img src="{{ asset('storage/' . $post->main_image) }}" alt="post image" class="w-100">
+                                    </section></td>
+                                    <tr>
+                                        <td>Картинка</td>
+                                        <td><section class="blog-post-featured-img" data-aos="fade-up">
+                                        <img src="{{ asset('storage/' . $post->preview_image) }}" alt="post image" class="w-100">
+                                    </section></td>
                                     </tbody>
                                 </table>
                             </div>

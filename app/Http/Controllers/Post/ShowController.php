@@ -14,7 +14,7 @@ class ShowController extends Controller
 //  sgl-запрос, при помощи класса Carbon приводим дату из created_at в нужный вид
         $data = Carbon::parse($post->created_at);
 
-//  sgl-запрос, олучаем рекомендуемые посты, схожих по категориям
+//  sgl-запрос, получаем рекомендуемые посты, схожих по категориям
 //  where('id', '!=', $post->id) -- условие чтобы id рекомендуемых постов не был равен id показываемого поста
         $relatedPosts = Post::where('category_id', $post->category_id)
             ->where('id', '!=', $post->id)

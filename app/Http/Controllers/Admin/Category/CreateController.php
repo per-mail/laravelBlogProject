@@ -13,6 +13,3 @@ class CreateController extends Controller
         return view ('admin.category.create');
     }
 }
-
-
-

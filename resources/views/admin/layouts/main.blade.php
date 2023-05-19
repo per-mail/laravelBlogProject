@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+     <!-- эта строка указывает, что вёрстка адаптивная,сайт адаптируется на весь экран -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MyBlog</title>
 
@@ -25,7 +26,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }} ">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }} ">
+
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     <!-- Preloader -->
@@ -50,16 +53,18 @@
                 </form>
             </li>
         </ul>
+        </div>
     </nav>
-
+    
             @include('admin.includes.sidebar')
             @yield('content')
-
- 
+          
     <footer class="main-footer">
         <strong>Copyright &copy; 2014-{{ now()->year }} <a href="{{ route('main.index') }}">Блог</a>.</strong>
         Все права защищены.
     </footer>
+   
+    </div>
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
                 <!-- Control sidebar content goes here -->
@@ -108,7 +113,7 @@
                 .custom-file-input:lang(en)~.custom-file-label::after {
                     content: "...";
                 }
-            </style>
+            </style> 
 </body>
 </html>
 

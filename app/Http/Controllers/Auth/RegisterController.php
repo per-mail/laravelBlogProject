@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
+
 class RegisterController extends Controller
 {
     /*
@@ -36,9 +38,11 @@ class RegisterController extends Controller
      *
      * @return void
      */
+
+// функция открывает форму регистрации
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest'); 
     }
 
     /**
@@ -47,12 +51,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    // валидируем введенные данные
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required'],
+            'password' => ['required', 'string', 'min:2', 'confirmed'],
         ]);
     }
 
@@ -62,11 +68,13 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+    // отправляем данные пользователя в базу
     protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'role' => $data['role'],
             'password' => Hash::make($data['password']),
         ]);
     }

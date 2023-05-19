@@ -1,5 +1,6 @@
 <?php
-
+// этот контроллер срабатывает только при добавлении пользлвателя в админке
+// при регистрации на сайте работает встроенный контроллер
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;

@@ -43,10 +43,10 @@ Route::group(['namespace'=> 'App\Http\Controllers\Category', 'prefix' => 'catego
     });
 });
 
-//'middleware' => ['auth', 'admin'] - сначала проверяем пользователей зашедших на сайт авторизованы ли они при помощи 'auth', далее 'admin' проверяет наличие прав админа у пользователя
-Route::group(['namespace'=> 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth', 'admin']], function () {
-// отправка письма пользователю при регистрации
-//Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
+//'middleware' => ['auth', 'admin'] -  проверяем пользователей зашедших на сайт авторизованы ли они при помощи 'auth'
+Route::group(['namespace'=> 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth']], function () {
+// когда делаем отправку письма пользователю при регистрации пишем
+//Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth',  'verified']], function () {
     Route::group(['namespace'=> 'Main', 'prefix' => 'main'], function () {
         Route::get('/', 'IndexController')->name('personal.main.index');
     });
@@ -64,7 +64,7 @@ Route::group(['namespace'=> 'App\Http\Controllers\Personal', 'prefix' => 'person
 
 // 'middleware' => ['auth', 'admin'] - сначала проверяем пользователей зашедших на сайт авторизованы ли они при помощи 'auth', далее 'admin' проверяет наличие прав админа у пользователя
 Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
-// отправка письма пользователю при регистрации
+// когда делаем отправку письма пользователю при регистрации пишем
 //    Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
     Route::group(['namespace'=> 'Main'], function () {
             Route::get('/', 'IndexController')->name('admin.main.index');
@@ -111,8 +111,14 @@ Route::group(['namespace'=> 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     });
 
 });
-
+// роуты register, logout, login их контроллеры находятся в Controllers в папке Auth
 Auth::routes();
+
 //  отправка письма пользователю при регистрации
 //Auth::routes(['verify' => true]);
 
+// подключаем капчу https://morioh.com/p/39ee35ef82ea
+use App\Http\Controllers\GoogleV3CaptchaController;
+ 
+Route::get('google-v3-recaptcha', [GoogleV3CaptchaController::class, 'index']);
+Route::post('validate-g-recaptcha', [GoogleV3CaptchaController::class, 'validateGCaptch']);

@@ -45,6 +45,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
+                                    <!-- ссылка на форму регистрации -->
                                     <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
                                 </li>
                             @endif

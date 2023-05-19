@@ -47,6 +47,7 @@
                         @endauth()
 {{--                        вход в Личный кабинет<--}}
                         @guest()
+                        <!-- personal.main.index' - куда заходим после логирования -->
                             <a class="nav-link" href="{{ route('personal.main.index') }}">Войти</a>
                         @endguest()
                     </li>

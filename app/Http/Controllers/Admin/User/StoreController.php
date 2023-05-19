@@ -1,5 +1,6 @@
 <?php
-
+// этот контроллер срабатывает только при добавлении пользлвателя в админке
+// при регистрации на сайте работает встроенный контроллер
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
@@ -15,7 +16,6 @@ class StoreController extends Controller
     {
 //  проверяем массив на наличие данных
         $data = $request->validated();
-
 //отправка письма пользователю при регистрации
 //// генерируем пароль и отправляем его на почту пользователя
 //        $password = Str::random(10);
@@ -28,13 +28,13 @@ class StoreController extends Controller
 //        event(new Registred($user));
 
 // этот блок переместили в job.php
-// //  скрываем пароль при помощи метода Hash, необходимая процедура и переназначаем скрытый пароль переменной $data
-//         $data['password'] = Hash::make($data['password']);
-// //  firstOrCreate - чтобы исключить дублирование названий категорий, дублирование проверяется по ключу titel
-//         User::firstOrCreate(['email' => $data['email']], $data);
+//  скрываем пароль при помощи метода Hash, необходимая процедура и переназначаем скрытый пароль переменной $data
+     //      $data['password'] = Hash::make($data['password']);
+//  firstOrCreate - чтобы исключить дублирование названий категорий, дублирование проверяется по ключу titel
+        User::firstOrCreate(['email' => $data['email']], $data);
         
 // запускаем StoreUserJob, $data - берём из файла StoreUserJob.php (private $data)
-          StoreUserJob::dispatch($data);
+        StoreUserJob::dispatch($data);
 
 
 //  начинает поиск файла с папки view потом идёт папка admin папка user, точку между ними пишем вместо слэша
